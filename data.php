@@ -18,7 +18,14 @@
 		
 	}
 	
-	
+	if (	isset($_POST["note"]) && 
+			isset($_POST["color"]) && 
+			!empty($_POST["note"]) && 
+			!empty($_POST["color"]) 
+	) {
+		saveNote($_POST["note"], $_POST["color"]);
+		
+	}
 
 ?>
 

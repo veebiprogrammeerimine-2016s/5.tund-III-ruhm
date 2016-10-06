@@ -1,8 +1,9 @@
 <?php 
 	// functions.php
+	require("../../../config.php");
 	
 	// et saab kasutada $_SESSION muutujaid
-	// kõigis failides mis on selle failiga seotud
+	// kÃµigis failides mis on selle failiga seotud
 	session_start(); 
 	
 	
@@ -27,7 +28,7 @@
 		$stmt->bind_param("ss", $email, $password );
 
 		if ( $stmt->execute() ) {
-			echo "salvestamine õnnestus";	
+			echo "salvestamine Ãµnnestus";	
 		} else {	
 			echo "ERROR ".$stmt->error;
 		}
@@ -51,7 +52,7 @@
 		// asendan ?
 		$stmt->bind_param("s", $email);
 		
-		// määran muutujad reale mis kätte saan
+		// mÃ¤Ã¤ran muutujad reale mis kÃ¤tte saan
 		$stmt->bind_result($id, $emailFromDb, $passwordFromDb, $created);
 		
 		$stmt->execute();
@@ -59,11 +60,11 @@
 		// ainult SLECTI'i puhul
 		if ($stmt->fetch()) {
 			
-			// vähemalt üks rida tuli
-			// kasutaja sisselogimise parool räsiks
+			// vÃ¤hemalt Ã¼ks rida tuli
+			// kasutaja sisselogimise parool rÃ¤siks
 			$hash = hash("sha512", $password);
 			if ($hash == $passwordFromDb) {
-				// õnnestus 
+				// Ãµnnestus 
 				echo "Kasutaja ".$id." logis sisse";
 				
 				$_SESSION["userId"] = $id;
@@ -76,7 +77,7 @@
 			}
 			
 		} else {
-			// ei leitud ühtegi rida
+			// ei leitud Ã¼htegi rida
 			$notice = "Sellist emaili ei ole!";
 		}
 		
@@ -93,7 +94,7 @@
 		$stmt->bind_param("ss", $note, $color );
 
 		if ( $stmt->execute() ) {
-			echo "salvestamine õnnestus";	
+			echo "salvestamine Ãµnnestus";	
 		} else {	
 			echo "ERROR ".$stmt->error;
 		}
