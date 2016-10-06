@@ -17,6 +17,8 @@
 		header("Location: login.php");
 		
 	}
+	
+	
 
 ?>
 
@@ -25,3 +27,19 @@
 	Tere tulemast <?=$_SESSION["userEmail"];?>!
 	<a href="?logout=1">Logi välja</a>
 </p>
+<h2>Märkmed</h2>
+<form method="POST">
+			
+	<label>Märkus</label><br>
+	<input name="note" type="text">
+	
+	<br><br>
+	
+	<label>Värv</label><br>
+	<input name="color" type="color">
+				
+	<br><br>
+	
+	<input type="submit">
+
+</form>
