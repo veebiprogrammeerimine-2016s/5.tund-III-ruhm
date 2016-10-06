@@ -102,6 +102,39 @@
 	}
 	
 	
+	function getAllNotes() {
+		
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"],  $GLOBALS["serverPassword"],  $GLOBALS["database"]);
+
+		$stmt = $mysqli->prepare("
+			SELECT id, note, color
+			FROM colorNotes
+		");
+		
+		$stmt->bind_result($id, $note, $color);
+		$stmt->execute();
+		
+		$result = array();
+		
+		// tsükkel töötab seni, kuni saab uue rea AB'i
+		// nii mitu korda palju SELECT lausega tuli
+		while ($stmt->fetch()) {
+			//echo $note."<br>";
+			
+			$object = new StdClass();
+			$object->id = $id;
+			$object->note = $note;
+			$object->noteColor = $color;
+			
+			
+			array_push($result, $object);
+			
+		}
+		
+		return $result;
+		
+	}
+	
 	
 	
 	

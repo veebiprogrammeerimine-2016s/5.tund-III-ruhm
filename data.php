@@ -26,6 +26,12 @@
 		saveNote($_POST["note"], $_POST["color"]);
 		
 	}
+	
+	$notes = getAllNotes();
+	
+	//echo "<pre>";
+	//var_dump($notes);
+	//echo "</pre>";
 
 ?>
 
@@ -50,3 +56,52 @@
 	<input type="submit">
 
 </form>
+
+<h2>arhiiv</h2>
+
+
+<?php 
+
+	//iga liikme kohta massiivis
+	foreach ($notes as $n) {
+		
+		$style = "width:100px; 
+				  float:left;
+				  min-height:100px; 
+				  border: 1px solid gray;
+				  background-color: ".$n->noteColor.";";
+		
+		echo "<p style='  ".$style."  '>".$n->note."</p>";
+	}
+
+
+?>
+
+
+<h2 style="clear:both;">Tabel</h2>
+<?php 
+
+	$html = "<table>";
+		
+		$html .= "<tr>";
+			$html .= "<th>id</th>";
+			$html .= "<th>Märkus</th>";
+			$html .= "<th>Värv</th>";
+		$html .= "</tr>";
+
+	foreach ($notes as $note) {
+		$html .= "<tr>";
+			$html .= "<td>".$note->id."</td>";
+			$html .= "<td>".$note->note."</td>";
+			$html .= "<td>".$note->noteColor."</td>";
+		$html .= "</tr>";
+	}
+	
+	$html .= "</table>";
+	
+	echo $html;
+
+?>
+
+
+
