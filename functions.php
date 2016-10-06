@@ -3,7 +3,7 @@
 	
 	// et saab kasutada $_SESSION muutujaid
 	// kõigis failides mis on selle failiga seotud
-	session_start();
+	session_start(); 
 	
 	
 	$database = "if16_romil";
@@ -83,6 +83,22 @@
 		return $notice;
 	}
 	
+	function saveNote($note, $color) {
+		
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"],  $GLOBALS["serverPassword"],  $GLOBALS["database"]);
+
+		$stmt = $mysqli->prepare("INSERT INTO colorNotes (note, color) VALUES (?, ?)");
+		echo $mysqli->error;
+		
+		$stmt->bind_param("ss", $note, $color );
+
+		if ( $stmt->execute() ) {
+			echo "salvestamine õnnestus";	
+		} else {	
+			echo "ERROR ".$stmt->error;
+		}
+		
+	}
 	
 	
 	
