@@ -71,7 +71,7 @@
 				$_SESSION["userEmail"] = $emailFromDb;
 				
 				header("Location: data.php");
-				
+				exit();
 			} else {
 				$notice = "Vale parool!";
 			}
@@ -133,6 +133,24 @@
 		
 		return $result;
 		
+	}
+	
+	
+	function cleanInput ($input) {
+		
+		// "   tere tulemast    "
+		$input = trim($input);
+		// "tere tulemast"
+		
+		// "tere \\tulemast"
+		$input = stripslashes($input);
+		// "tere tulemast"
+		
+		// "<"
+		$input = htmlspecialchars($input);
+		// "&lt;"
+		
+		return $input;
 	}
 	
 	

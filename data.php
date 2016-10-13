@@ -5,8 +5,8 @@
 	//ei ole sisseloginud, suunan login lehele
 	if(!isset ($_SESSION["userId"])) {
 		header("Location: login.php");
+		exit();
 	}
-	
 	
 	//kas kasutaja tahab välja logida
 	// kas aadressireal on logout olemas
@@ -15,7 +15,7 @@
 		session_destroy();
 		
 		header("Location: login.php");
-		
+		exit();
 	}
 	
 	if (	isset($_POST["note"]) && 
@@ -23,7 +23,10 @@
 			!empty($_POST["note"]) && 
 			!empty($_POST["color"]) 
 	) {
-		saveNote($_POST["note"], $_POST["color"]);
+		
+		$note = cleanInput($_POST["note"]);
+		
+		saveNote($note, $_POST["color"]);
 		
 	}
 	
@@ -40,7 +43,8 @@
 	Tere tulemast <?=$_SESSION["userEmail"];?>!
 	<a href="?logout=1">Logi välja</a>
 </p>
-<h2>Märkmed</h2>
+<h2><i>Märkmed</i></h2>
+<h2>&lt;i&gt;Märkmed&lt;/i&gt;</h2>
 <form method="POST">
 			
 	<label>Märkus</label><br>
